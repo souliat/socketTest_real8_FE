@@ -29,7 +29,6 @@ const Chat = props => {
   const channel_ref = React.useRef(null);
 
   // state에 axiso get한 데이터 불러오기
-  // const chat_data = useSelector((state) => state.chat.list);
   const channel_data = useSelector(state => state.channel.list);
 
   // 첫 렌더링
