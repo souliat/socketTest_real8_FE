@@ -19,6 +19,7 @@ import { loadChannel, createChannel, deleteChannel } from '../redux/modules/chan
 
 // page
 import Header from '../components/Header';
+import { clearStorage, setStorage } from '../shared/localStorage';
 
 const Chat = props => {
   const dispatch = useDispatch();
@@ -36,8 +37,9 @@ const Chat = props => {
     dispatch(loadChannel());
   }, [dispatch]);
 
-  React.useEffect(() => {
+  React.useEffect(() => { 
     if (id) {
+      console.log("useEffect >> LoadChat넘기기전 id : " + id);
       dispatch(loadChat(id));
     }
   }, [dispatch]);
@@ -98,6 +100,8 @@ const Chat = props => {
                         key={index}
                         onClick={() => {
                           navigate(`/Chat/${list.id}`);
+                          // clearStorage('channelId');
+                          // setStorage('channelId', `${list.id}`);
                         }}
                       >
                         <p>🔒 {list.channel}</p>

@@ -19,6 +19,7 @@ const Chatting = props => {
   const chat_data = useSelector(state => state.chat.list);
 
   console.log(`chat_data: ${chat_data}`);
+  console.log("chat_data_ggg : "+chat_data);
 
   // 웹 소켓 통신
   const dispatch = useDispatch();
@@ -31,9 +32,11 @@ const Chatting = props => {
   // 채널id 가져오기
   // const channel = useSelector(state => state.channel.channel);
   // const channelId = useSelector(state => state.channel.id);
-  console.log(JSON.stringify(channel_data));
-  const channel = useSelector(state => channel_data[0].channel);
-  const channelId = useSelector(state => channel_data[0].id);
+  // console.log(JSON.stringify(channel_data));
+  // const channel = useSelector(state => channel_data[0].channel);
+  // console.log("Chatting.js 채널 : " + channel)
+  // const channelId = useSelector(state => channel_data[0].id);
+  // console.log("Chatting.js 채널ID : " + channelId)
 
 
   // 토큰
@@ -52,13 +55,13 @@ const Chatting = props => {
   const memberId = getStorage('memberId');
   console.log("memberId" + memberId);
 
-  // 렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
+  // 렌더링 될 때마다 연결, 구독 다른 방으로 옮길 때 연결, 구독 해제
   React.useEffect(() => {
     wsConnectSubscribe();
     return () => {
       wsDisConnectUnsubscribe();
     };
-  }, []); //channelId
+  }, [props.id]); //channelId
 
   // 웹소켓 연결, 구독
   function wsConnectSubscribe() {
@@ -70,10 +73,14 @@ const Chatting = props => {
         () => {
           ws.subscribe(
             `/sub/api/chat/rooms/${parseInt(props.id)}`,
+            // `/sub/api/chat/rooms/${getStorage('channelId')}`,
             data => {
               const newMessage = JSON.parse(data.body);
-              // console.log(newMessage);
+              console.log(newMessage);
+              console.log("props.id :" + props.id);
+              console.log("웹소켓 연결 구독 : " + newMessage.roomId);
               dispatch(loadChat(newMessage.roomId));
+              // dispatch(loadChat(getStorage('channleId')));
             },
             { token: token }
           );
@@ -125,14 +132,14 @@ const Chatting = props => {
       // send할 데이터
       const data = {
         type: 'TALK',
-        roomId: channelId,
+        roomId: props.id,
         sender: sender,
         memberId: memberId,  // 2022-07-07 추가 편도랑.
         // message: message_ref,
         message: message_ref.current.value,
       };
 
-      console.log("ddd>>>d"+JSON.stringify(data));
+      console.log("send할 데이터"+JSON.stringify(data));
 
       // console.log("chat_data"+JSON.stringify(chat_data));
       // 빈문자열이면 리턴

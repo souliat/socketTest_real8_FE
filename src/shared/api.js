@@ -1,4 +1,6 @@
 import instance from './axios';
+import axios from 'axios';
+import { getStorage } from './localStorage';
 
 export const userApi = {
   // 로그인
@@ -14,7 +16,8 @@ export const userApi = {
 
 export const chatAPI = {
   loadChat: function (id) {
-    return instance.get(`/api/channel/${id}/messages`);
+    console.log("loadChat api 호출 전 마지막 id " + id);
+    return axios.get(`/api/channel/${id}/messages`,{headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/chat");
   },
   postChat: function (id, message) {
@@ -23,7 +26,7 @@ export const chatAPI = {
     // return instance.post("http://localhost:5001/chat", chat);
   },
   loadChannel: function () {
-    return instance.get('/api/channels');
+    return axios.get('/api/channels',{headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/channel");
   },
   createChannel: function (channel) {
