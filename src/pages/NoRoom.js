@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+// image
+import mung from '../assets/mung.jpg';
 
 const NoRoom = (props) => {
   return (
