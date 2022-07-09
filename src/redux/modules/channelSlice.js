@@ -56,6 +56,7 @@ export const deleteChannel = (list) => async (dispatch) => {
     const res = await chatAPI.deleteChannel(list);
     console.log(list);
     dispatch(deleteChannelAction(list.id));
+    window.location.replace('/chat');
   } catch (error) {
     console.log(error);
   }
