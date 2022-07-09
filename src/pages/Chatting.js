@@ -11,7 +11,7 @@ import SockJS from 'sockjs-client';
 
 // components  = Notfound
 import { getStorage } from '../shared/localStorage';
-import { loadChat, postChat } from '../redux/modules/chatSlice';
+import { loadChat} from '../redux/modules/chatSlice';
 
 const Chatting = props => {
   const chat_data = useSelector(state => state.chat.list);
@@ -134,10 +134,9 @@ const Chatting = props => {
       waitForConnection(ws, function () {
         ws.send('/pub/api/chat/message', { token: token }, JSON.stringify(data));
         console.log(ws.ws.readyState);
-        // console.log(`보낼 아이디: ${id}`);
-        // console.log(`보낼 메시지: ${message_ref}`);
-        // dispatch(postChat(id, message_ref)); 
-        dispatch(postChat(data.roomId, data.message));
+
+        // 메세지 전송 후 다시 메세지 목록 조회하는 요청? 필요 없음!! 지우니까 401 에러 사라짐
+        // dispatch(postChat(data.roomId, data.message));
       });
     } catch (error) {
       console.log(error);

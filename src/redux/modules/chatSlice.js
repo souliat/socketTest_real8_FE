@@ -18,9 +18,6 @@ const chatSlice = createSlice({
     loadChatAction: (state, action) => {
       state.list = action.payload;
     },
-    postChatAction: (state, action) => {
-      state.list.push(action.payload);
-    },
   },
 });
 
@@ -36,18 +33,7 @@ export const loadChat = id => async dispatch => {
   }
 };
 
-// 채팅 작성하기
-export const postChat = (id, message) => async dispatch => {
-  try {
-    const res = await chatAPI.postChat(id, message);
-    console.log('response');
-    console.log(res.data);
-    dispatch(postChatAction(res.data));
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-// 액션,리듀서 내보내기
-export const { loadChatAction, postChatAction } = chatSlice.actions;
+// 액션,리듀서 내보내기 , postChatAction 지움
+export const { loadChatAction} = chatSlice.actions;
 export default chatSlice.reducer;

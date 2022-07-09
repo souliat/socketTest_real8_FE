@@ -21,11 +21,6 @@ export const chatAPI = {
     return axios.get(`http://localhost:8080/api/channel/${id}/messages`, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/chat");
   },
-  postChat: function (id, message) {
-    //chatroom /pub
-    return axios.get(`http://localhost:8080/api/channel/${id}/messages`, message, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
-    // return instance.post("http://localhost:5001/chat", chat); 
-  },
   loadChannel: function () {
     return axios.get('http://localhost:8080/api/channels', {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/channel");

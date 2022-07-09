@@ -14,19 +14,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // toolkit - Slice
-import { loadChat, postChat } from '../redux/modules/chatSlice';
+import { loadChat } from '../redux/modules/chatSlice';
 import { loadChannel, createChannel, deleteChannel } from '../redux/modules/channelSlice';
 
 // page
 import Header from '../components/Header';
-import { clearStorage, setStorage } from '../shared/localStorage';
 
 const Chat = props => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const message_ref = React.useRef(null);
   const channel_ref = React.useRef(null);
 
   // state에 axiso get한 데이터 불러오기
@@ -60,16 +58,6 @@ const Chat = props => {
       })
     );
     channel_ref.current.value = '';
-  };
-
-  const postChatList = () => {
-    dispatch(
-      postChat({
-        roomId: id,
-        message: message_ref.current.value,
-      })
-    );
-    message_ref.current.value = '';
   };
 
   return (
