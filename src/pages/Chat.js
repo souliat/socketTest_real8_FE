@@ -56,6 +56,7 @@ const Chat = props => {
     dispatch(
       createChannel({
         channel: channel_ref.current.value,
+        memberId: 2,
       })
     );
     channel_ref.current.value = '';

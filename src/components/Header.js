@@ -25,6 +25,7 @@ const Header = () => {
     clearStorage('token');
     clearStorage('useremail');
     clearStorage('nickname');
+    clearStorage('memberId');
     window.location.replace('/');
     navigate('/');
   };

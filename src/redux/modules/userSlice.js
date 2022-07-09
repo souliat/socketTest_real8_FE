@@ -10,16 +10,16 @@ import instance from '../../shared/axios';
 export const login = userData => {
   return async function (dispatch) {
     try {
-      const response = await instance.post('/user/login', { useremail: userData.useremail, password: userData.password });
+      const response = await instance.post('/user/login', { username: userData.username, password: userData.password });
       console.log('로그인 성공');
       console.log(response.data);
       console.log('토큰값', response.data.accessToken);
       setStorage('token', response.data.accessToken);
-      setStorage('useremail', response.data.useremail);
+      // setStorage('useremail', response.data.useremail);
       setStorage('nickname', response.data.nickname);
       setStorage('memberId', response.data.memberId);  // ""로 키값을 썼을 때 setStorage가 안됐음. 스크립트는 홑따옴표 씀.
-      // console.log("1111>>"+!!getStorage('token'));
       dispatch(checkLogin(getStorage('token')));
+      
     } catch (error) {
       console.log('로그인 실패');
       alert(error);

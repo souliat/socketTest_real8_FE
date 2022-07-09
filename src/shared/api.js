@@ -17,24 +17,24 @@ export const userApi = {
 export const chatAPI = {
   loadChat: function (id) {
     console.log("loadChat api 호출 전 마지막 id " + id);
-    return axios.get(`/api/channel/${id}/messages`,{headers: {Authorization: 'Bearer ' + getStorage('token')}});
+    return axios.get(`http://13.125.4.231/api/channel/${id}/messages`, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/chat");
   },
   postChat: function (id, message) {
     //chatroom /pub
-    return instance.get(`/api/channel/${id}/messages`, message);
-    // return instance.post("http://localhost:5001/chat", chat);
+    return axios.get(`http://13.125.4.231/api/channel/${id}/messages`, message, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
+    // return instance.post("http://localhost:5001/chat", chat); 
   },
   loadChannel: function () {
-    return axios.get('/api/channels',{headers: {Authorization: 'Bearer ' + getStorage('token')}});
+    return axios.get('http://13.125.4.231/api/channels', {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.get("http://localhost:5001/channel");
   },
   createChannel: function (channel) {
-    return instance.post('/api/channel', channel);
+    return axios.post('http://13.125.4.231/api/channel', channel, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.post("http://localhost:5001/channel", channel);
   },
   deleteChannel: function (list) {
-    return instance.delete(`/api/channel/${list.id}`);
+    return axios.delete(`http://13.125.4.231/api/channel/${list.id}`, {headers: {Authorization: 'Bearer ' + getStorage('token')}});
     // return instance.delete(`http://localhost:5001/channel/${list.id}`);
   },
 };

@@ -28,27 +28,27 @@ const Login = props => {
     }
   }, [isLogin]);
 
-  const inputEmail = useRef('');
+  const inputUsername = useRef('');
   const inputPwd = useRef('');
 
   const handleSignUp = event => {
     event.preventDefault();
 
-    let emailValue = inputEmail.current.value;
+    let usernameValue = inputUsername.current.value;
     let pwdValue = inputPwd.current.value;
 
     // 공백 체크
-    if (emailValue.trim() === '') {
+    if (usernameValue.trim() === '') {
       return false;
     }
     if (pwdValue.trim() === '') {
       return false;
     }
 
-    const userData = { useremail: emailValue, password: pwdValue };
+    const userData = { username: usernameValue, password: pwdValue };
     dispatch(login(userData));
 
-    inputEmail.current.value = '';
+    inputUsername.current.value = '';
     inputPwd.current.value = '';
   };
 
@@ -78,7 +78,7 @@ const Login = props => {
             Apple 계정으로 로그인
           </button>
           <Line>또는</Line>
-          <input ref={inputEmail} type='text' placeholder='이메일을 입력하세요.' />
+          <input ref={inputUsername} type='text' placeholder='이메일을 입력하세요.' />
           <input ref={inputPwd} type='password' placeholder='비밀번호를 입력해주세요.' />
           <button onClick={() => handleSignUp}>이메일로 로그인</button>
         </InputBox>
