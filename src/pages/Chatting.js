@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
@@ -10,12 +10,10 @@ import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
 // components  = Notfound
-import NoRoom from './NoRoom';
 import { getStorage } from '../shared/localStorage';
 import { loadChat, postChat } from '../redux/modules/chatSlice';
 
 const Chatting = props => {
-  const channel_data = useSelector(state => state.channel.list);
   const chat_data = useSelector(state => state.chat.list);
 
   console.log(`chat_data: ${chat_data}`);
@@ -25,26 +23,12 @@ const Chatting = props => {
   const dispatch = useDispatch();
 
   // 소켓 통신 객체 // 백엔드서버
-  const sock = new SockJS('http://3.39.6.175/chatting');
+  const sock = new SockJS('http://localhost:8080/chatting');
   // const sock = new SockJS('http://localhost:8080/chatting');
   const ws = Stomp.over(sock);
 
-  // 채널id 가져오기
-  // const channel = useSelector(state => state.channel.channel);
-  // const channelId = useSelector(state => state.channel.id);
-  // console.log(JSON.stringify(channel_data));
-  // const channel = useSelector(state => channel_data[0].channel);
-  // console.log("Chatting.js 채널 : " + channel)
-  // const channelId = useSelector(state => channel_data[0].id);
-  // console.log("Chatting.js 채널ID : " + channelId)
-
-
   // 토큰
   const token = getStorage('token');
-
-  // 보낼 메시지 텍스트
-  // const message = useSelector(state => state.chat.message);
-  // console.log(`message: ${message}`);
 
   // sender 정보 가져오기
   const sender = getStorage('nickname');
@@ -161,11 +145,6 @@ const Chatting = props => {
     }
   }
 
-  // 웹 소켓 통신 끝
-  const addChat = event => {
-    event.preventDefault();
-  };
-
   const message_ref = React.useRef(null);
   return (
     <React.Fragment>
@@ -191,7 +170,7 @@ const Chatting = props => {
             <p>🟠🟡🟢🟤🔵🟣</p>
           </ChatToolUp>
           <form onSubmit={sendMessage}>
-            <input ref={message_ref} className='Content' type='text' placeholder='7기 공지방에 메시지 보내기'></input>
+            <input id='inputMessage' ref={message_ref} className='Content' type='text' placeholder='7기 공지방에 메시지 보내기'></input>
             <ChatToolDown>
               <p>
                 🟣🔵🟤🟠🟡🟢
@@ -201,6 +180,7 @@ const Chatting = props => {
                   type='button'
                   onClick={() => {
                     sendMessage();
+                    document.querySelector('#inputMessage').value = '';
                   }}
                 />
               </p>

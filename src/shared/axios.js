@@ -2,8 +2,8 @@ import axios from 'axios';
 import { getStorage } from './localStorage';
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:8080',
-  baseURL: 'http://3.39.6.175',
+  baseURL: 'http://localhost:8080',
+  // baseURL: 'http://3.39.6.175',
   headers: { 'Content-Type': 'application/json' },
 });
 
