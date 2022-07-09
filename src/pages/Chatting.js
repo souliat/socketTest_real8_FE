@@ -25,7 +25,7 @@ const Chatting = props => {
   const dispatch = useDispatch();
 
   // 소켓 통신 객체 // 백엔드서버
-  const sock = new SockJS('http://13.125.4.231/chatting');
+  const sock = new SockJS('http://3.39.6.175/chatting');
   // const sock = new SockJS('http://localhost:8080/chatting');
   const ws = Stomp.over(sock);
 
