@@ -147,8 +147,9 @@ const Chatting = props => {
   const message_ref = React.useRef(null);
   return (
     <React.Fragment>
-      <p>Chatting</p>
+      <p style={{fontWeight:"bold"}}>Chatting</p>
       <>
+      <ChatListContainer id ='ChatListContainerDiv'>
         <ChatList>
           {chat_data &&
             chat_data.map((list, index) => {
@@ -164,12 +165,13 @@ const Chatting = props => {
               );
             })}
         </ChatList>
+      </ChatListContainer>
         <ChatPost>
           <ChatToolUp>
             <p>🟠🟡🟢🟤🔵🟣</p>
           </ChatToolUp>
           <form onSubmit={sendMessage}>
-            <input id='inputMessage' ref={message_ref} className='Content' type='text' placeholder='7기 공지방에 메시지 보내기'></input>
+            <input id='inputMessage' ref={message_ref} className='Content' type='text' placeholder='멍친구에게 메시지 보내기'></input>
             <ChatToolDown>
               <p>
                 🟣🔵🟤🟠🟡🟢
@@ -193,12 +195,17 @@ const Chatting = props => {
 
 // params 받아온거를 api get요청 하나 더 만들어서 roomId를 디스패치하고
 // chatList 부분에 noRoom && Chatting 비교해서 출력한다.
+const ChatListContainer = styled.div`
+  width: 80.5%;
+  max-height: 74%;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+`;
 
 const ChatList = styled.div`
-  width: 1150px;
+  width: 1230%;
   min-height: 100%;
-  border: 1px white solid;
-  background-color: lightgray;
+  background-color: #f78d70;
 
   & p {
     color: black;
@@ -207,10 +214,10 @@ const ChatList = styled.div`
 `;
 
 const ChatContent = styled.div`
-  width: 1140px;
-  background-color: white;
+width: 81%;
+  background-color: #ffffff;
   flex-direction: column;
-  margin: 5px 5px auto;
+  margin: 5px 0 auto;
   & p {
     color: black;
     padding: 15px;
@@ -218,11 +225,11 @@ const ChatContent = styled.div`
 `;
 
 const ChatPost = styled.div`
-  width: 1150px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: 110px;
   background-color: white;
-  margin: 5px auto;
-  border: 1px solid;
   border-radius: 10px;
 
   & input {
@@ -239,11 +246,10 @@ const ChatPost = styled.div`
 `;
 
 const ChatToolUp = styled.div`
-  width: 1148px;
+width: 80.5%;
   height: 30px;
-  background-color: lightgray;
+  background-color: #f78d70;
   border-radius: 10px 10px 0px 0px;
-  margin: auto;
   & p {
     color: black;
     padding: 7px;
@@ -251,10 +257,10 @@ const ChatToolUp = styled.div`
 `;
 
 const ChatToolDown = styled.div`
-  width: 1148px;
+  width: 80.5%;
   height: 30px;
-  background-color: lightgray;
-  margin: 8px auto;
+  background-color: #f78d70;
+  margin: 8px 0;
   border-radius: 0px 0px 10px 10px;
   & p {
     color: black;

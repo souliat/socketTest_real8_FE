@@ -39,8 +39,8 @@ const Header = () => {
         </div>
       )}
       <div className='search'>
-        <input type='text' placeholder='검색어 입력' />
-        <img src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png' alt='Search' />
+        {/* <input type='text' placeholder='검색어 입력' />
+        <img src='https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png' alt='Search' /> */}
       </div>
     </TopBar>
   );
@@ -49,30 +49,29 @@ const Header = () => {
 const TopBar = styled.div`
   /* width: 1535px; */
   height: 40px;
-  border: 2px solid;
-  background-color: #121016;
-  border: 1px white solid;
+  background-color: #fbf1e8;
+  //border: 1px white solid;
 }
-  .search {
-    position: relative;
-    width: 400px;
-    margin: 3px auto;
-  }
-  input {
-    width: 100%;
-    height: 10px;
-    border: 1px solid #bbb;
-    padding: 14px 12px;
-    font-size: 14px;
-  }
-  img {
-    position: absolute;
-    width: 15px;
-    top: 6px;
-    right: 12px;
-    margin: 0;
-    cursor: pointer;
-  }
+  // .search {
+  //   position: relative;
+  //   width: 400px;
+  //   margin: 3px auto;
+  // }
+  // input {
+  //   width: 100%;
+  //   height: 10px;
+  //   border: 1px solid #bbb;
+  //   padding: 14px 12px;
+  //   font-size: 14px;
+  // }
+  // img {
+  //   position: absolute;
+  //   width: 15px;
+  //   top: 6px;
+  //   right: 12px;
+  //   margin: 0;
+  //   cursor: pointer;
+  // }
   p {
     float: right;
     color: white;
@@ -86,8 +85,11 @@ const TopBar = styled.div`
     cursor: pointer;
   }
   .logout {
-    color: white;
     cursor: pointer;
+    & p {
+      color: black;
+      font-weight: bold;
+    }
   }
 `;
 

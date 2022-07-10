@@ -1,3 +1,4 @@
+// 메인화면 
 // react
 import React from 'react';
 
@@ -20,7 +21,6 @@ import { loadChannel, createChannel, deleteChannel } from '../redux/modules/chan
 // page
 import Header from '../components/Header';
 
-import logout from '../assets/logout.png';
 const Chat = props => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,12 +69,20 @@ const Chat = props => {
           {/* <LeftBar>
             <div id='circle'></div>
           </LeftBar> */}
-          <div style={{backgroundColor: '#F2F3F6'}}>
+          <div>
             <WorkSpace>
-              <p>Mung Friend</p>
+              <p>Hanghae99</p>
             </WorkSpace>
-            <ChannelList2>
-                <p>🔽 개설된 채팅방</p>
+            <ChannelBox>
+              <ChannelList1>
+                <p>📬 스레드</p>
+                <p>📮 멘션 및 반응</p>
+                <p>📝 Slack Connect</p>
+                <p>⛓ 더보기</p>
+              </ChannelList1>
+              <hr />
+              <ChannelList2>
+                <p>🔽 채널</p>
                 {channel_data &&
                   channel_data.map((list, index) => {
                     return (
@@ -86,13 +94,13 @@ const Chat = props => {
                           // setStorage('channelId', `${list.id}`);
                         }}
                       >
-                        <p>🐶 {list.channel}</p>
+                        <p>🔒 {list.channel}</p>
                         <div
                           onClick={() => {
                             dispatch(deleteChannel(list));
                           }}
                         >
-                          <img src={logout} />
+                          ⛔
                           
                         </div>
                       </ChannelListBox>
@@ -103,18 +111,16 @@ const Chat = props => {
                   <button onClick={() => addChannel}>채널추가</button>
                 </form>
               </ChannelList2>
+            </ChannelBox>
+            
           </div>
-
-          {/* 우측 메인 화면 */}
-          <div style={{width: '100%'}}>
+          <div>
             <ChannelTitle>
-              <p>멍친구와 대화하기</p>
+              <p>7기 공지방</p>
             </ChannelTitle>
-
             <BookMark>
-              <p>+ 공지 사항</p>
+              <p>+ 책갈피</p>
             </BookMark>
-
             <ChatBox>
               <ChatList>
                 {!id && <NoRoom />}
@@ -131,57 +137,78 @@ const Container = styled.div`
   // width: 100%;
   // height: 100%;
 `;
-
+const LeftBar = styled.div`
+  width: 70px;
+  height: 680px;
+  background-color: #19171d;
+  border: 1px white solid;
+  #circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: tomato;
+    margin: 10px auto;
+  }
+`;
 const WorkSpace = styled.div`
   width: 300px;
-  height: 80px;
-  padding: 10px 0;
-  background-color: #ffffff;
+  height: 50px;
+  border: 1px white solid;
+  background-color: #19171d;
   & p {
-    color: black;
-    font-size: 30px;
-    padding: 15px;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
   }
 `;
 
+const ChannelBox = styled.div`
+  width: 300px;
+  height: 630px;
+  border: 1px white solid;
+  background-color: #19171d;
+`;
+const ChannelList1 = styled.div`
+  width: 300px;
+  height: 150px;
+  background-color: #19171d;
+  & p {
+    color: white;
+    padding: 10px;
+  }
+`;
 const ChannelList2 = styled.div`
   width: 300px;
-  //height: 450px;
-  height: 100%;
-  // border-top: 1px black solid;
-  background-color: #F2F3F6;
+  height: 450px;
+  background-color: #19171d;
   & p {
-    color: black;
+    color: white;
     padding: 10px;
   }
 `;
 const ChannelListBox = styled.div`
   width: 300px;
   height: 30px;
-  background-color: #F2F3F6;
+  background-color: #19171d;
   display: flex;
-  justify-content: space-between;
   cursor: pointer;
-  position: relative;
 
   & p {
-    color: black;
+    color: white;
   }
   & div {
     cursor: pointer;
-    top: 0;
-    right: 0px;
-  }
-  & img {
-    width: 25px;
-    margin-top: 7px;
+    padding: 10px;
+    position: fixed;
+    left: 310px;
   }
 `;
 
 const ChannelTitle = styled.div`
-  width: 100%;
+  width: 1165px;
   height: 50px;
-  background-color: #F67452;
+  border: 1px white solid;
+  background-color: #19171d;
   & p {
     color: white;
     padding: 15px;
@@ -189,20 +216,22 @@ const ChannelTitle = styled.div`
 `;
 
 const BookMark = styled.div`
-  width: 100%;
+  width: 1165px;
   height: 30px;
-  background-color: #f78d70;
+  border: 1px white solid;
+  background-color: #191454;
   & p {
     color: white;
     font-size: 12px;
     padding: 10px;
   }
 `;
+
 const ChatBox = styled.div`
-  position: relative;
-  width: 100%;
+  width: 1165px;
   height: 600px;
-  background-color: #ffffff;
+  border: 1px white solid;
+  background-color: lightgray;
   margin: 5px & p {
     color: black;
     padding: 15px;
@@ -210,16 +239,15 @@ const ChatBox = styled.div`
 `;
 
 const ChatList = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 600px;
-
+  width: 1164px;
+  height: 480px;
+  border: 1px white solid;
+  background-color: white;
+  overflow: scroll;
   & p {
     color: black;
     padding: 15px;
   }
 `;
-
 
 export default Chat;
