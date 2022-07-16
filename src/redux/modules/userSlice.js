@@ -8,7 +8,7 @@ import axios from 'axios';
 export const login = userData => {
   return async function (dispatch) {
     try {
-      const response = await axios.post('http://localhost:8080/member/login', { username: userData.username, password: userData.password });
+      const response = await axios.post('http://3.39.6.175/member/login', { username: userData.username, password: userData.password });
       console.log('로그인 성공');
       console.log(response.data);
       console.log('토큰값', response.data.accessToken);
